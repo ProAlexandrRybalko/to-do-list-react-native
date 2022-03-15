@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import ToDoList from './src/components/ToDoList/ToDoList';
+import { store } from './src/store';
+import { NativeRouter, Routes, Route } from 'react-router-native'
+import { ManageAccoutning } from './src/components/ManageAccounting/ManageAccounting';
+import { AboutUs } from './src/components/AboutUs/AboutUs';
+import { Login } from './src/components/Login/Login';
+import { Signup } from './src/components/Signup/Signup';
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeRouter>
+      <Provider store={store}>
+      <Routes>
+        <Route path="/" element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/todolist" element={<ToDoList/>}/>
+        <Route path="/accounting/:id" element={<ManageAccoutning/>}/>
+        <Route path="/aboutus" element={<AboutUs/>}/>
+      </Routes>
+      </Provider>
+    </NativeRouter>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
